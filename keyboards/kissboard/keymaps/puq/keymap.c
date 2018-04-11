@@ -174,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE] = KEYMAP( /* BASE */
   DE_P    , UMAC    , XXXXXXX, DE_COMM    , DE_Q       , DE_V            , DE_C           , DE_L       , DE_M  , DE_B          , \
   DE_H    , DE_I    , DE_E   , AMAC       , OMAC       , DE_D            , DE_T           , DE_R       , DE_N  , SMAC          , \
-  DE_K    , DE_Y    , DE_DOT , X(APOS)    , DE_X       , DE_J            , DE_G           , DE_Z       , DE_W  , DE_F          , \
+  DE_K    , DE_Y    , X(APOS), DE_DOT     , DE_X       , DE_J            , DE_G           , DE_Z       , DE_W  , DE_F          , \
   TT(_NMB), MO(_SC1), SFMAC  , TD(LCT_RCT), TD(LAL_RAL), LT(_FNB,KC_BSPC), LT(_NMB,KC_DEL), TD(LSF_GUI), KC_SPC, LT(_SC2,KC_ENT) \
 ),
 
@@ -182,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_SBASE] = KEYMAP( /* SFMAC */
   _______, SFUMAC , _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, SFAMAC , SFOMAC , _______, _______, _______, _______, DE_S   , \
-  _______, _______, _______, DE_QUOT, _______, _______, _______, _______, _______, _______, \
+  _______, _______, DE_QUOT, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
