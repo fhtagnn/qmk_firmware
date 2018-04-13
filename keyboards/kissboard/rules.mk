@@ -66,7 +66,7 @@ CUSTOM_MATRIX = yes    # Remote matrix from the wireless bridge
 NKRO_ENABLE = yes		# USB Nkey Rollover - not yet supported in LUFA
 # BACKLIGHT_ENABLE = yes  # Enable keyboard backlight functionality
 # MIDI_ENABLE = yes 		# MIDI controls
-UNICODE_ENABLE = yes 		# Unicode
+UNICODEMAP_ENABLE = yes 	# Unicode
 # BLUETOOTH_ENABLE = yes # Enable Bluetooth with the Adafruit EZ-Key HID
 
 USB = /dev/ttyACM0
