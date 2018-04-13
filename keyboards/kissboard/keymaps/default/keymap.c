@@ -43,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_A,    KC_N,    KC_I,    KC_S,    KC_F,           KC_D,    KC_T,    KC_H,    KC_O,    KC_R    },
   {KC_COMM, KC_DOT,  KC_J,    KC_G,    KC_SLSH,        KC_SCLN, KC_W,    KC_K,    KC_QUOT, KC_X    },
   {XXXXXXX, M(VOLU), M(ESCM), KC_TAB,  KC_LCTL,        KC_LALT, KC_ENT,  KC_DEL,  KC_PGUP, XXXXXXX },
-  {XXXXXXX, M(VOLD), KC_LGUI, KC_E,    FNKEY,          SHIFT,   KC_SPC,  KC_BSPC, KC_PGDN, XXXXXXX }
+  {XXXXXXX, XXXXXXX, XXXXXXX, KC_E,    FNKEY,          SHIFT,   KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX }
 },
 
 
@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {_______, _______, _______, _______, _______,       _______, _______, _______, _______, _______ },
   {_______, _______, _______, _______, _______,       _______, _______, _______, _______, _______ },
   {XXXXXXX, _______, _______, _______, _______,       _______, _______, _______, _______, XXXXXXX },
-  {XXXXXXX, _______, _______, _______, _______,       _______, _______, _______, _______, XXXXXXX }
+  {XXXXXXX, XXXXXXX, XXXXXXX, _______, _______,       _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
 },
 
 
@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_AT,   KC_LEFT, KC_DOWN, KC_RGHT, KC_HASH,       KC_LPRN, KC_4,    KC_5,    KC_6,    KC_PLUS },
   {KC_ASTR, KC_UNDS, KC_EXLM, KC_DLR,  KC_BSLS,       KC_LCBR, KC_1,    KC_2,    KC_3,    KC_ENT  },
   {XXXXXXX, KC_HOME, KC_GRV,  KC_PWR,  _______,       _______, KC_EQL,  KC_TILD, KC_DOT,  XXXXXXX },
-  {XXXXXXX, KC_END,  _______, _______, _______,       _______, KC_0,    _______, KC_PSCR, XXXXXXX }
+  {XXXXXXX, XXXXXXX, XXXXXXX, _______, _______,       _______, KC_0,    XXXXXXX, XXXXXXX, XXXXXXX }
 },
 
 
@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {_______, _______, _______, _______, _______,       KC_RPRN, KC_F4,   KC_F5,   KC_F6,   KC_F11  },
   {_______, _______, _______, _______, _______,       KC_RCBR, KC_F1,   KC_F2,   KC_F3,   KC_F12  },
   {XXXXXXX, _______, _______, _______, _______,       _______, _______, _______, _______, XXXXXXX },
-  {XXXXXXX, _______, _______, _______, _______,       _______, _______, _______, _______, XXXXXXX }
+  {XXXXXXX, XXXXXXX, XXXXXXX, _______, _______,       _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
 }
 
 };

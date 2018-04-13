@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    Unknown
 #define PRODUCT         kissboard
-#define DESCRIPTION     41 keys, straight cols, thumbkeys, diacritica key
+#define DESCRIPTION     42 keys straight cols thumbkeys diacritica key
 
 /* key matrix size */
 #define MATRIX_ROWS 5
@@ -75,10 +75,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEBOUNCING_DELAY 2
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
-#define LOCKING_SUPPORT_ENABLE
+//#define LOCKING_SUPPORT_ENABLE
 
 /* Locking resynchronize hack */
-#define LOCKING_RESYNC_ENABLE
+//#define LOCKING_RESYNC_ENABLE
 
 #define TAPPING_TOGGLE 2
 #define TAPPING_TERM 250
