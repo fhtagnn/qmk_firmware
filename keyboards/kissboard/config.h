@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    Unknown
 #define PRODUCT         kissboard
-#define DESCRIPTION     41 keys, straight cols, thumbkeys, diacritica key
+#define DESCRIPTION     42 keys straight cols thumbkeys diacritica key
 
 /* key matrix size */
 #define MATRIX_ROWS 5
@@ -67,7 +67,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define NO_ACTION_MACRO
 //#define NO_ACTION_FUNCTION
 
-/* Copied from puqbase 
+/* Copied from puqbase
  * check if really needed
  */
 
@@ -84,7 +84,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 250
 #define UNICODE_TYPE_DELAY 0
 
-/*  
+/*
  * end of puqbase copy
  */
 
