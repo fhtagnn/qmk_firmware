@@ -1,1 +1,0 @@
-# The puq variante layout for kissboard
