@@ -178,7 +178,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   DE_P    , UMAC    , XXXXXXX, DE_COMM , DE_Q       , DE_V            , DE_C       , DE_L           , DE_M    , DE_B   , \
   DE_H    , DE_I    , DE_E   , AMAC    , OMAC       , DE_D            , DE_T       , DE_R           , DE_N    , SMAC   , \
   DE_K    , DE_Y    , X(APOS), DE_DOT  , DE_X       , DE_J            , DE_G       , DE_Z           , DE_W    , DE_F   , \
-            _______ ,TT(_NMB), MO(_SC1), TD(LCT_RCT), LT(_NMB,KC_DEL) , KC_SPC     , LT(_SC2,KC_ENT), _______ , \
+            XXXXXXX ,TT(_NMB), MO(_SC1), TD(LCT_RCT), LT(_NMB,KC_DEL) , KC_SPC     , LT(_SC2,KC_ENT), XXXXXXX ,  \
                                SFMAC   , TD(LAL_RAL), LT(_FNB,KC_BSPC), TD(LSF_GUI)    \
 ),
 
