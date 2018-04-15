@@ -67,7 +67,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define NO_ACTION_MACRO
 //#define NO_ACTION_FUNCTION
 
-/* Copied from puqbase 
+/* Copied from puqbase
  * check if really needed
  */
 
@@ -84,7 +84,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 250
 #define UNICODE_TYPE_DELAY 0
 
-/*  
+/*
  * end of puqbase copy
  */
 
