@@ -1,3 +1,3 @@
 TAP_DANCE_ENABLE = yes
 UNICODE_ENABLE = no
-UNICODEDEMAP_ENABLE = yes 	# Unicode
+UNICODEMAP_ENABLE = yes 	# Unicode
