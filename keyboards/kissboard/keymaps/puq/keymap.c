@@ -1,4 +1,4 @@
-/* © 2017 Wolf Belschner - dassuan@bitmessage.ch
+/* © 2018 Wolf Belschner - dassuan@bitmessage.ch
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,6 +45,9 @@
 #define SMAC    M(40)      // call s
 #define SS      M(41)      // send ß
 
+#define NUBLK   M(45)      // numlock numbers on
+#define NUULK   M(46)      // numlock numbers off
+
 #define CUTP    M(50)      // cut on hold - paste on tap
 #define COPP    M(51)      // copy on hold - paste on tap
 #define RDUD    M(52)      // redo on hold - undo on tap
@@ -62,6 +65,7 @@ enum layers {
   _L33,                    // Ö
   _L41,                    // ß
   _NMB,                    // navigation - numerals
+  _NUB,                    // navigation - Numlock numerals
   _FNB,                    // nav-mark - F-keys
   _SC1,                    // special characters 1
   _SC2,                    // special characters 2
@@ -73,6 +77,7 @@ enum puq_keycodes {
   BASE = SAFE_RANGE,
   SBASE,
   NMB,
+  NUB,
   FNB,
   SC1,
   SC2,
@@ -80,8 +85,8 @@ enum puq_keycodes {
 
 // os switches
   LINUX,
-  WIN,
-  OSX
+  WIN,    // with WinCompose - https://github.com/SamHocevar/wincompose
+  OSX     // untested
 };
 
 // Tap Dance Declarations
@@ -171,89 +176,110 @@ const uint32_t PROGMEM unicode_map[] = {
  *                      | SFMAC| LALT |    | BSPC | LSFT |
  *                      | =LSFT| RALT |    | FNB  | RGUI |
  *                      '-------------'    '-------------'
- *
  */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-[_BASE] = KEYMAP( /* BASE */
-  DE_P    , UMAC    , XXXXXXX, DE_COMM , DE_Q       , DE_V            , DE_C       , DE_L           , DE_M    , DE_B   , \
-  DE_H    , DE_I    , DE_E   , AMAC    , OMAC       , DE_D            , DE_T       , DE_R           , DE_N    , SMAC   , \
-  DE_K    , DE_Y    , X(APOS), DE_DOT  , DE_X       , DE_J            , DE_G       , DE_Z           , DE_W    , DE_F   , \
-            XXXXXXX ,TT(_NMB), MO(_SC1), TD(LCT_RCT), LT(_NMB,KC_DEL) , KC_SPC     , LT(_SC2,KC_ENT), XXXXXXX ,  \
-                               SFMAC   , TD(LAL_RAL), LT(_FNB,KC_BSPC), TD(LSF_GUI)    \
-),
+[_BASE] = { /* BASE */
+  { DE_P   , UMAC    , XXXXXXX , DE_COMM , DE_Q       , DE_V            , DE_C       , DE_L           , DE_M    , DE_B    },
+  { DE_H   , DE_I    , DE_E    , AMAC    , OMAC       , DE_D            , DE_T       , DE_R           , DE_N    , SMAC    },
+  { DE_K   , DE_Y    , X(APOS) , DE_DOT  , DE_X       , DE_J            , DE_G       , DE_Z           , DE_W    , DE_F    },
+  { XXXXXXX, XXXXXXX , TT(_NMB), MO(_SC1), TD(LCT_RCT), LT(_NMB,KC_DEL) , KC_SPC     , LT(_SC2,KC_ENT), XXXXXXX , XXXXXXX },
+  { XXXXXXX, XXXXXXX , XXXXXXX , SFMAC   , TD(LAL_RAL), LT(_FNB,KC_BSPC), TD(LSF_GUI), XXXXXXX        , XXXXXXX , XXXXXXX }
+},
 
 //SHIFT MACRO DUMMY LAYER
-[_SBASE] = KEYMAP( /* SFMAC */
-  _______, SFUMAC , _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, SFAMAC , SFOMAC , _______, _______, _______, _______, DE_S   , \
-  _______, _______, DE_QUOT, _______, _______, _______, _______, _______, _______, _______, \
-           _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_SBASE] = { /* SFMAC */
+  { _______, SFUMAC , _______, _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, SFAMAC , SFOMAC , _______, _______, _______, _______, DE_S    },
+  { _______, _______, DE_QUOT, _______, _______, _______, _______, _______, _______, _______ },
+  { XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
 
 //UMLAUT MACRO DUMMY LAYERS
-[_L11] = KEYMAP( /* UMAC */
-  _______, _______, UE     , _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-           _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_L11] = { /* UMAC */
+  { _______, _______, UE     , _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
 
-[_L13] = KEYMAP( /* SFUMAC */
-  _______, _______, SFUE   , _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_L13] = { /* SFUMAC */
+  { _______, _______, SFUE   , _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
 
-[_L21] = KEYMAP( /* AMAC */
-  _______, _______, AE     , _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_L21] = { /* AMAC */
+  { _______, _______, AE     , _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
 
-[_L23] = KEYMAP( /* SFAMAC */
-  _______, _______, SFAE   , _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-           _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_L23] = { /* SFAMAC */
+  { _______, _______, SFAE   , _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
 
-[_L31] = KEYMAP( /* OMAC */
-  _______, _______, OE     , _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-           _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_L31] = { /* OMAC */
+  { _______, _______, OE     , _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
 
-[_L33] = KEYMAP( /* SFOMAC */
-  _______, _______, SFOE   , _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-           _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_L33] = { /* SFOMAC */
+  { _______, _______, SFOE   , _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
 
-[_L41] = KEYMAP( /* SMAC */
-  _______, _______, SS     , _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-           _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_L41] = { /* SMAC */
+  { _______, _______, SS     , _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
+
+/*
+ * .----------------------------------.    .----------------------------------.
+ * | ESC  | PGUP |  UP  | PGDN | NLCK |    | PMNS |   7  |   8  |   9  | PAST |
+ * |/CAPS |      |      |      | on   |    |      |      |      |      |      |
+ * !------+------+------+------+------!    !------+------+------+------+------!
+ * | HOME | LEFT | DOWN | RGHT | END  |    |   0  |   4  |   5  |   6  |  ,   |
+ * !------+------+------+------+------!    !------+------+------+------+------!
+ * | INS  | TAB  | CUTP | COPP | RDUD |    ! PPLS |   1  |   2  |   3  | PSLS |
+ * '------+------+------+------+------'    !------+------+------+------+------'
+ *        |      |      |      |      |    |      |      |      |      |
+ *        '-------------+------+------!    !------+------+-------------'
+ *                      |      |      |    |      |      |
+ *                      '-------------'    '-------------'
+ */
+[_NMB] = { /* NAVIGATION - NUMERALS */
+  { TD(ESC_CAP), KC_PGUP, KC_UP  , KC_PGDN, NUBLK  , KC_PMNS, KC_7   , KC_8   , KC_9   , KC_PAST },
+  { KC_HOME    , KC_LEFT, KC_DOWN, KC_RGHT, KC_END , KC_0   , KC_4   , KC_5   , KC_6   , KC_COMM },
+  { KC_INS     , KC_TAB , CUTP   , COPP   , RDUD   , KC_PPLS, KC_1   , KC_2   , KC_3   , KC_PSLS },
+  { XXXXXXX    , _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX    , XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
 
 /*
  * .----------------------------------.    .----------------------------------.
  * | ESC  | PGUP |  UP  | PGDN | NLCK |    | PMNS |  P7  |  P8  |  P9  | PAST |
- * |/CAPS |      |      |      |      |    |      |      |      |      |      |
+ * |/CAPS |      |      |      | off  |    |      |      |      |      |      |
  * !------+------+------+------+------!    !------+------+------+------+------!
- * | HOME | LEFT | DOWN | RGHT | END  |    |  P0  |  P4  |  P5  |  P6  | PDOT |
+ * | HOME | LEFT | DOWN | RGHT | END  |    |  P0  |  P4  |  P5  |  P6  | PCMM |
  * !------+------+------+------+------!    !------+------+------+------+------!
  * | INS  | TAB  | CUTP | COPP | RDUD |    ! PPLS |  P1  |  P2  |  P3  | PSLS |
  * '------+------+------+------+------'    !------+------+------+------+------'
@@ -261,15 +287,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *        '-------------+------+------!    !------+------+-------------'
  *                      |      |      |    |      |      |
  *                      '-------------'    '-------------'
- *
  */
-[_NMB] = KEYMAP( /* NAVIGATION - NUMERALS */
-  TD(ESC_CAP), KC_PGUP, KC_UP  , KC_PGDN, KC_NLCK, KC_PMNS, KC_P7  , KC_P8  , KC_P9  , KC_PAST, \
-  KC_HOME    , KC_LEFT, KC_DOWN, KC_RGHT, KC_END , KC_P0  , KC_P4  , KC_P5  , KC_P6  , KC_COMM, \
-  KC_INS     , KC_TAB , CUTP   , COPP   , RDUD   , KC_PPLS, KC_P1  , KC_P2  , KC_P3  , KC_PSLS, \
-           _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_NUB] = { /* NAVIGATION - NUMLOCK NUMERALS */
+  { TD(ESC_CAP), KC_PGUP, KC_UP  , KC_PGDN, NUULK  , KC_PMNS, KC_P7  , KC_P8  , KC_P9  , KC_PAST },
+  { KC_HOME    , KC_LEFT, KC_DOWN, KC_RGHT, KC_END , KC_P0  , KC_P4  , KC_P5  , KC_P6  , KC_PCMM },
+  { KC_INS     , KC_TAB , CUTP   , COPP   , RDUD   , KC_PPLS, KC_P1  , KC_P2  , KC_P3  , KC_PSLS },
+  { XXXXXXX    , _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX    , XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
 
 /*
  * .----------------------------------.    .----------------------------------.
@@ -283,15 +308,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *        '-------------+------+------!    !------+------+-------------'
  *                      |      |      |    |      |      |
  *                      '-------------'    '-------------'
- *
  */
-[_FNB] = KEYMAP( /*  NAV-MARK - FUNCTION-KEYS*/
-  KC_ESC    , S(KC_PGUP), S(KC_UP)  , S(KC_PGDN), KC_PAUS  , KC_F12 , KC_F7  , KC_F8  , KC_F9  , KC_LGUI , \
-  S(KC_HOME), S(KC_LEFT), S(KC_DOWN), S(KC_RGHT), S(KC_END), KC_F10 , KC_F4  , KC_F5  , KC_F6  , KC_DOT  , \
-  KC_INS    , KC_TAB    , SCUTP     , SCOPP     , RDUD     , KC_F11 , KC_F1  , KC_F2  , KC_F3  , OSL(_OS), \
-           _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_FNB] = { /*  NAV-MARK - FUNCTION-KEYS*/
+  { KC_ESC    , S(KC_PGUP), S(KC_UP)  , S(KC_PGDN), KC_PAUS  , KC_F12 , KC_F7  , KC_F8  , KC_F9  , KC_LGUI  },
+  { S(KC_HOME), S(KC_LEFT), S(KC_DOWN), S(KC_RGHT), S(KC_END), KC_F10 , KC_F4  , KC_F5  , KC_F6  , KC_DOT   },
+  { KC_INS    , KC_TAB    , SCUTP     , SCOPP     , RDUD     , KC_F11 , KC_F1  , KC_F2  , KC_F3  , OSL(_OS) },
+  { XXXXXXX   , _______   , _______   , _______   , _______  , _______, _______, _______, _______, XXXXXXX  },
+  { XXXXXXX   , XXXXXXX   , XXXXXXX   , _______   , _______  , _______, _______, XXXXXXX, XXXXXXX, XXXXXXX  }
+},
 
 /*
  * .----------------------------------.    .----------------------------------.
@@ -305,15 +329,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *        '-------------+------+------!    !------+------+-------------'
  *                      |      |      |    |      |      |
  *                      '-------------'    '-------------'
- *
  */
-[_SC1] = KEYMAP( /* SPECIAL CHARACTERS 1 */
-  DE_PARA, DE_UNDS, X(QULO), X(QUUP), X(QUEN), DE_EXLM, DE_LESS, DE_MORE, DE_EQL , DE_AMPR, \
-  DE_BSLS, DE_SLSH, DE_PIPE, DE_AT  , DE_ASTR, DE_QST , DE_LPRN, DE_RPRN, DE_MINS, X(FDOT), \
-  DE_HASH, DE_DLR , X(GMRI), X(GMLE), DE_TILD, DE_PLUS, DE_PERC, DE_QUOT, DE_DQOT, DE_RING, \
-           _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_SC1] = { /* SPECIAL CHARACTERS 1 */
+  { DE_PARA, DE_UNDS, X(QULO), X(QUUP), X(QUEN), DE_EXLM, DE_LESS, DE_MORE, DE_EQL , DE_AMPR },
+  { DE_BSLS, DE_SLSH, DE_PIPE, DE_AT  , DE_ASTR, DE_QST , DE_LPRN, DE_RPRN, DE_MINS, X(FDOT) },
+  { DE_HASH, DE_DLR , X(GMRI), X(GMLE), DE_TILD, DE_PLUS, DE_PERC, DE_QUOT, DE_DQOT, DE_RING },
+  { XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
 
 /*
  * .----------------------------------.    .----------------------------------.
@@ -327,15 +350,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *        '-------------+------+------!    !------+------+-------------'
  *                      |      |      |    |      |      |
  *                      '-------------'    '-------------'
- *
  */
-[_SC2] = KEYMAP( /* SPECIAL CHARACTERS 2 */
-  X(CARE), X(TDOT), X(SQUL), X(SQUU), X(SQUE), X(SICL), DE_LBRC, DE_RBRC, X(MUUU), X(DIAM), \
-  DE_GRV , DE_ACUT, DE_EURO, X(WINK), X(DIAR), X(REQM), DE_LCBR, DE_RCBR, X(LSTR), KC_DOT , \
-  DE_CIRC, X(CENT), X(SGMR), X(SGML), DE_TILD, X(SKLL), X(CYCL), DE_SQ2 , DE_SQ3 , X(RUNN), \
-           _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_SC2] = { /* SPECIAL CHARACTERS 2 */
+  { X(CARE), X(TDOT), X(SQUL), X(SQUU), X(SQUE), X(SICL), DE_LBRC, DE_RBRC, X(MUUU), X(DIAM) },
+  { DE_GRV , DE_ACUT, DE_EURO, X(WINK), X(DIAR), X(REQM), DE_LCBR, DE_RCBR, X(LSTR), KC_DOT  },
+  { DE_CIRC, X(CENT), X(SGMR), X(SGML), DE_TILD, X(SKLL), X(CYCL), DE_SQ2 , DE_SQ3 , X(RUNN) },
+  { XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+},
 
 /*
  * .----------------------------------.    .----------------------------------.
@@ -349,15 +371,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *        '-------------+------+------!    !------+------+-------------'
  *                      |      |      |    |      |      |
  *                      '-------------'    '-------------'
- *
  */
-[_OS] = KEYMAP( /* OS-UC-INPUTMETHOD oneshot x-l-w */
-  _______, _______, _______, _______, _______, _______, _______, LINUX  , _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, OSX    , _______, _______, _______, WIN    , _______, \
-           _______, _______, _______, _______, _______, _______, _______, _______,  \
-                             _______, _______, _______, _______   \
-),
+[_OS] = { /* OS-UC-INPUTMETHOD oneshot x-l-w */
+  { _______, _______, _______, _______, _______, _______, _______, LINUX  , _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, _______, _______, OSX    , _______, _______, _______, WIN    , _______ },
+  { XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX }
+}
 
 };
 
@@ -369,7 +390,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   switch(id) {
 
-    case 01: /* SFMAC */
+    case 01:  /* SFMAC */
       if (record->event.pressed) {
         layer_on(_SBASE);
         return MACRO( D(LSFT), END );
@@ -547,82 +568,81 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
       }
       break;
 
-    case 50: {             /* CUTP = CUT-PASTE */
+    case 45: /* NUBLK */
+        if (record->event.pressed) {
+          layer_on(_NUB);
+          return MACRO( D(NLCK), U(NLCK), D(LSFT), END );
+        } else {
+          }
+        break;
+
+     case 46: /* NUULK */
+     if (record->event.pressed) {
+       layer_off(_NUB);
+       return MACRO( D(NLCK), U(NLCK), U(LSFT), END );
+     } else {
+       }
+     break;
+
+    case 50:              /* CUTP = CUT-PASTE */
       if (record->event.pressed) {
          key_timer = timer_read();
-       }
-       else {
-           if (timer_elapsed(key_timer) > 250) {
+       } else {
+           if (timer_elapsed (key_timer) > 250) {
            return MACRO( D(LCTL), T(X), U(LCTL), END );
-           }
-           else {
+       } else {
            return MACRO( D(LCTL), T(V), U(LCTL), END );
            }
        }
        break;
-    }
 
-    case 51: {             /* COPP = COPY-PASTE */
+    case 51:              /* COPP = COPY-PASTE */
       if (record->event.pressed) {
          key_timer = timer_read();
-       }
-       else {
-           if (timer_elapsed(key_timer) > 250) {
+       } else {
+           if (timer_elapsed (key_timer) > 250) {
            return MACRO( D(LCTL), T(C), U(LCTL), END );
-           }
-           else {
-           return MACRO(  D(LCTL), T(V), U(LCTL), END );
+       } else {
+           return MACRO( D(LCTL), T(V), U(LCTL), END );
            }
        }
        break;
-    }
 
-    case 52: {         /* RDUD = REDO-UNDO */
+    case 52:          /* RDUD = REDO-UNDO */
       if (record->event.pressed) {
          key_timer = timer_read();
-       }
-       else {
-           if (timer_elapsed(key_timer) > 250) {
+       } else {
+           if (timer_elapsed (key_timer) > 250) {
            return MACRO( D(LCTL), T(Z), U(LCTL), END );
-           }
-           else {
+       } else {
            return MACRO( D(LCTL), T(Y), U(LCTL), END );
            }
        }
        break;
-    }
 
-    case 53: {             /* SCUTP = CUT-SHIFT-PASTE */
+    case 53:             /* SCUTP = CUT-SHIFT-PASTE */
       if (record->event.pressed) {
          key_timer = timer_read();
-       }
-       else {
-           if (timer_elapsed(key_timer) > 250) {
+       } else {
+           if (timer_elapsed (key_timer) > 250) {
            return MACRO(  D(LCTL), T(X), U(LCTL), END );
-           }
-           else {
+       } else {
            return MACRO( D(LSFT), D(LCTL), T(V), U(LCTL), U(LSFT), END );
            }
        }
        break;
-    }
 
-    case 54: {             /* SCOPP = COPY-SHIFT-PASTE */
+    case 54:              /* SCOPP = COPY-SHIFT-PASTE */
       if (record->event.pressed) {
          key_timer = timer_read();
-       }
-       else {
-           if (timer_elapsed(key_timer) > 250) {
+       } else {
+           if (timer_elapsed (key_timer) > 250) {
            return MACRO( D(LCTL), T(C), U(LCTL), END );
-           }
-           else {
+       } else {
            return MACRO(  D(LSFT), D(LCTL), T(V), U(LCTL), U(LSFT), END );
            }
        }
        break;
-    }
-
-
   }
   return MACRO_NONE;
 };
