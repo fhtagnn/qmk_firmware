@@ -1,7 +1,7 @@
 
 OPT_DEFS += -DMITOSIS_PROMICRO
 MITOSIS_UPLOAD_COMMAND = while [ ! -r $(USB) ]; do sleep 1; done; \
-                         avrdude -p $(MCU) -c avr109 -U flash:w:$(TARGET).hex -P $(USB)
+                         avrdude -p $(MCU) -c avr109 -P $(USB) -U flash:w:$(TARGET).hex 
 
 # # project specific files
 SRC = matrix.c
@@ -45,7 +45,7 @@ F_USB = $(F_CPU)
 
 # Bootloader
 #     This definition is optional, and if your keyboard supports multiple bootloaders of
-#     different sizes, comment this out, and the correct address will be loaded 
+#     different sizes, comment this out, and the correct address will be loaded
 #     automatically (+60). See bootloader.mk for all options.
 BOOTLOADER = caterina
 
