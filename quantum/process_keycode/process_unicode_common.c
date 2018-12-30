@@ -88,6 +88,12 @@ void unicode_input_finish (void) {
       register_code(KC_SPC);
       unregister_code(KC_SPC);
       break;
+   case UC_WINC:
+       register_code(KC_SPC);
+       unregister_code(KC_SPC);
+    	register_code(KC_BSPC);
+    	unregister_code(KC_BSPC);
+    	break; 
   }
 
   // reregister previously set mods

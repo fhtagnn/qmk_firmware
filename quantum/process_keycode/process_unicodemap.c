@@ -59,7 +59,7 @@ bool process_unicode_map(uint16_t keycode, keyrecord_t *record) {
       register_hex32(hi + 0xd800);
       register_hex32(lo + 0xdc00);
       unicode_input_finish();
-    } else if ((code > 0x10ffff && (input_mode == UC_OSX || input_mode == UC_OSX_RALT)) || (code > 0xFFFFF && input_mode == UC_LNX)) {
+    } else if ((code > 0x10ffff && (input_mode == UC_OSX || input_mode == UC_OSX_RALT)) || (code > 0xFFFFF && input_mode == UC_LNX) || (code > 0xFFFFF && input_mode == UC_WINC)) {
       // when character is out of range supported by the OS
       unicode_map_input_error();
     } else {
