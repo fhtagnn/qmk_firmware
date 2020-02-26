@@ -35,19 +35,25 @@ Double tap delete key, then input keys of the combination. Compose function must
 ### NMB (numbers and navigation)
 Tap and hold: plain numerals on right hand, navigation keys on left hand. Double tap toggles lock.
 CUTP > hold = Cut, 	tap = Paste     (min. hold ¼ sec)
+
 COPP > hold = Copy, 	tap = Paste
+
 RDUD > hold = Redo, 	tap = Undo
 
 ### FNB Layer (function keys and textmarking)
-Tap and hold: function keys (F1-F12) on right hand, textmarking on left hand. Double tap toggles lock. 
+Tap and hold: function keys (F1-F12) on right hand, textmarking on left hand. Double tap toggles lock.
+
 SCUTP > Shift+Cut, 	tap = Shift+Paste (shell mode)
+
 SCOPP > Shift+Copy, 	tap = Shift+Paste (shell mode)
 
 ### NUB Layer (FNB+p)
 Same as NMB layer with numberpad numerals. Useful for some programs like Blender. »FNB+p« activates the layer. In case numlock state is off it can be activated/toggled by pressing »q«. While layer NUB is active, press »p« or »FNB+p« to switch off again.
 
 ### OS Key (FNB+f)
-Switches unicode input modes for different operating systems. Preset on boot is LINUX (IBUS). »FNB+f« toggles: 1. Android¹; 2. Windows with WinCompose²; 3. IOS (untested); 4. back to Linux.
+Switches unicode input modes for different operating systems. Preset on boot is LINUX (IBUS).
+
+»FNB+f« toggles: 1. Android¹; 2. Windows with WinCompose²; 3. IOS (untested); 4. back to Linux.
 
 ### SC1 Layer (Special characters 1)
 Most common special characters.
