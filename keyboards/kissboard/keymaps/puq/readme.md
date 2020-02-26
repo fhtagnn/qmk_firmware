@@ -8,3 +8,6 @@ Layout explanation
 * Bottom Label: double tap output
 * Top Label: hold modifier
 * Corner labels: Layers
+
+A minimalistic ergonomic keyboard layout for fast and efficient typing in English and German with easy access to characters and accents for western languages. It is operational from the keyboard controller without additional software drivers, programmed in QMK and works for Linux, Android¹, Windows² and IOS. Basic OS layout setting is German or German with Tilde. 
+The layout is mainly designed for relaxed typing, it might not be perfect for other tasks which require complex key combinations.
