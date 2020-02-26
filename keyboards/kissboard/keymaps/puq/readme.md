@@ -1,4 +1,4 @@
-# The puq variant layout for kissboard
+# PUQ LAYOUT FOR KISSBOARD
 
 A minimalistic ergonomic keyboard layout for fast and efficient typing in English and German with easy access to characters and accents for western languages. It is operational from the keyboard controller without additional software drivers, programmed in QMK and works for Linux, Android¹, Windows² and IOS. Basic OS layout setting is German (DE) or German with Tilde. 
 
