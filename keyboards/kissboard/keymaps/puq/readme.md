@@ -3,11 +3,7 @@
 A minimalistic ergonomic keyboard layout for fast and efficient typing in English and German with easy access to characters and accents for western languages. It is operational from the keyboard controller without additional software drivers, programmed in QMK and works for Linux, Android¹, Windows² and IOS. Basic OS layout setting is German (DE) or German with Tilde. 
 
 [![PUQ Layout](https://user-images.githubusercontent.com/16945782/50550486-03bc7c00-0c72-11e9-8fca-22db85fef475.png)](http://www.keyboard-layout-editor.com/#/gists/a7e90b22a3bd994868389277b32144ea)
-
-Layout explanation
-* Middle label: standard tap output
-* Bottom Label: double tap output
-* Corner labels: Layers
+* Middle label: standard tap output * Bottom Label: double tap output * Corner labels: Layers
 
 
 ### Diacritics Key ❖
@@ -29,11 +25,25 @@ c/C  |ç © ® ™ 🄯		|Ç
 The accents cover most latin western charsets. PUQ is made for German (DE) keylayout setting, so diaeresis ranks first. For the usage with different languages or language sets it could be suitable to replace diacritics or adjust the order of accents within the macros. 
 Diacritics key ❖ utilizes a delicate set of layers and macros that call layers to call specific macros. Two new functions were added to QMK (»send_diacritica« und »reset_diac_cycle«) to send different unicode characters by repeated keypresses.
 
+Internal workings:
+If key »a« is pressed macro AMAC clears all layers, activates layer _LA and sends character »a«.
+
+If ❖ is pressed after »a«, macro AE replaces letter »a« with »ä« (system), cancels layer _LA and activates layer _DA.
+
+If ❖ is pressed again, macro ADIAC replaces »ä« with »á«. More presses of ❖ produce more unicode diacritics »à,â,ã,æ,å«.
+
+If a different key is pressed, the macro OFF_DA cancels layer _DA, resets diacritics cycle and that key is sent.
+
+Shift key activates the layer _SBASE. »Shift+a« activates layer _LAS.
+
+Non-umlaut diacritics use less layers: »e« calls macro EMAC which activates layer _DE and sends »e«. Macro EDIAC sends unicode diacritics (ë,é,è,ê) on repeated ❖ keypresses.
+
 ### Compose Key (double tap del key)
 Double tap delete key, then input keys of the combination. Compose function must be enabled within the OS. With Windows »WinCompose²« must be installed. Compose is not available with Android. Defined trigger key is right Gui/right Windows key. Useful with rarer characters not covered by diacritics key or direct key input (þ,ð,×,ċ,Ł,š,Ş). The display of characters is dependent on their presence in the font.
 
 ### NMB (numbers and navigation)
 Tap and hold: plain numerals on right hand, navigation keys on left hand. Double tap toggles lock.
+
 CUTP > hold = Cut, 	tap = Paste     (min. hold ¼ sec)
 
 COPP > hold = Copy, 	tap = Paste
@@ -65,6 +75,11 @@ More special characters, dead keys, gimmicks.
 Input of unicodes does not work with capslock active.
 The layout is mainly designed for relaxed typing, it might not be perfect for other tasks which require complex key combinations.
 
+
+¹ Unicodes up to 0xFFFF can be sent directly by USB keyboard to rooted Android devices. To enable it, editing the relevant *.kcm files on the device is mandatory. The space + alt entry must be complemented with 0xef00, a reserved unicode. It allows Android to recognize and translate raw unicode input. Tested with Samsung SM-P600 tablet with Android 5.5.1 and Sony smartphones. The controller should connect by OTG adapter. The free app “NulInputMethod” can be utilized to represent the USB keyboard. More info
+
+² Use latest version of WinCompose 
+
 ### Credits
 Layout concept and QMK implementation by dassuan
 
@@ -77,6 +92,4 @@ The ergonomics design is based on the Kissboard concept by Urac
 The hardware for wireless Kissboard is designed by fhtagnn, https://github.com/fhtagnn/kissboard
 
 
-¹ Unicodes up to 0xFFFF can be sent directly by USB keyboard to rooted Android devices. To enable it, editing the relevant *.kcm files on the device is mandatory. The space + alt entry must be complemented with 0xef00, a reserved unicode. It allows Android to recognize and translate raw unicode input. Tested with Samsung SM-P600 tablet with Android 5.5.1 and Sony smartphones. The controller should connect by OTG adapter. The free app “NulInputMethod” can be utilized to represent the USB keyboard. More info
 
-² Use latest version of WinCompose 
