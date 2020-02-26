@@ -3,7 +3,7 @@
 A minimalistic ergonomic keyboard layout for fast and efficient typing in English and German with easy access to characters and accents for western languages. It is operational from the keyboard controller without additional software drivers, programmed in QMK and works for Linux, Android¹, Windows² and IOS. Basic OS layout setting is German (DE) or German with Tilde. 
 
 [![PUQ Layout](https://user-images.githubusercontent.com/16945782/50550486-03bc7c00-0c72-11e9-8fca-22db85fef475.png)](http://www.keyboard-layout-editor.com/#/gists/a7e90b22a3bd994868389277b32144ea)
-* Middle label: standard tap output * Bottom Label: double tap output * Corner labels: Layers
+• Middle label: standard tap output    • Bottom Label: double tap output    • Corner labels: Layers
 
 
 ### Diacritics Key ❖
