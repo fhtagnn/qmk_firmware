@@ -72,8 +72,7 @@ Layout concept and QMK implementation by dassuan, mailto:wolf@inter-state.de
 
 Calculated for German and English with the optimizer of Andreas Wettstein. http://509.ch/opt.7z
 
-Layout and optimizer originate from »Aus der Neo Welt – ADNW«,http://www.adnw.de/
-and the ADNW discussion forum, https://groups.google.com/forum/#!forum/adnw
+Layout and optimizer originate from »Aus der Neo Welt – ADNW«, http://www.adnw.de/ and the ADNW discussion forum, https://groups.google.com/forum/#!forum/adnw, both sites in German.
 
 The ergonomics design is based on the Kissboard concept by Urac, https://docs.google.com/document/d/1TQ_BZYoZRW-ZFIaiolPAr9yNul6SBKypeA4ataw5Tz4/edit
 
