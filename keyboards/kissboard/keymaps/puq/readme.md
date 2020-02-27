@@ -25,19 +25,6 @@ c/C  |ç © ® ™ 🄯		|Ç
 The accents cover most latin western charsets. PUQ is made for German (DE) keylayout setting, so diaeresis ranks first. For the usage with different languages or language sets it could be suitable to replace diacritics or adjust the order of accents within the macros. 
 Diacritics key ❖ utilizes a delicate set of layers and macros that call layers to call specific macros. Two new functions were added to QMK (»send_diacritica« und »reset_diac_cycle«) to send different unicode characters by repeated keypresses.
 
-Internal workings:
-If key »a« is pressed macro AMAC clears all layers, activates layer _LA and sends character »a«.
-
-If ❖ is pressed after »a«, macro AE replaces letter »a« with »ä« (system), cancels layer _LA and activates layer _DA.
-
-If ❖ is pressed again, macro ADIAC replaces »ä« with »á«. More presses of ❖ produce more unicode diacritics »à,â,ã,æ,å«.
-
-If a different key is pressed, the macro OFF_DA cancels layer _DA, resets diacritics cycle and that key is sent.
-
-Shift key activates the layer _SBASE. »Shift+a« activates layer _LAS.
-
-Non-umlaut diacritics use less layers: »e« calls macro EMAC which activates layer _DE and sends »e«. Macro EDIAC sends unicode diacritics (ë,é,è,ê) on repeated ❖ keypresses.
-
 ### Compose Key (double tap del key)
 Double tap delete key, then input keys of the combination. Compose function must be enabled within the OS. With Windows »WinCompose²« must be installed. Compose is not available with Android. Defined trigger key is right Gui/right Windows key. Useful with rarer characters not covered by diacritics key or direct key input (þ,ð,×,ċ,Ł,š,Ş). The display of characters is dependent on their presence in the font.
 
@@ -76,18 +63,19 @@ Input of unicodes does not work with capslock active.
 The layout is mainly designed for relaxed typing, it might not be perfect for other tasks which require complex key combinations.
 
 
-¹ Unicodes up to 0xFFFF can be sent directly by USB keyboard to rooted Android devices. To enable it, editing the relevant *.kcm files on the device is mandatory. The space + alt entry must be complemented with 0xef00, a reserved unicode. It allows Android to recognize and translate raw unicode input. Tested with Samsung SM-P600 tablet with Android 5.5.1 and Sony smartphones. The controller should connect by OTG adapter. The free app “NulInputMethod” can be utilized to represent the USB keyboard. More info
+¹ Unicodes up to 0xFFFF can be sent directly by USB keyboard to rooted Android devices. To enable it, editing the relevant *.kcm files on the device is mandatory. The space + alt entry must be complemented with 0xef00, a reserved unicode. It allows Android to recognize and translate raw unicode input. Tested with Samsung SM-P600 tablet with Android 5.5.1 and Sony smartphones. The controller should connect by OTG adapter. The free app “NulInputMethod” can be utilized to represent the USB keyboard. More info: https://android.stackexchange.com/questions/38405/how-to-insert-unicode-characters-by-their-hex-codes-using-usb-keyboard-on-ics
 
-² Use latest version of WinCompose 
+² Use latest version of WinCompose https://github.com/SamHocevar/wincompose
 
 ### Credits
-Layout concept and QMK implementation by dassuan
+Layout concept and QMK implementation by dassuan, mailto:wolf@inter-state.de
 
-Calculated for German and English with the optimizer of Andreas Wettstein
+Calculated for German and English with the optimizer of Andreas Wettstein. http://509.ch/opt.7z
 
-Layout and optimizer originate from »Aus der Neo Welt – ADNW«, and the ADNW discussion forum
+Layout and optimizer originate from »Aus der Neo Welt – ADNW«,http://www.adnw.de/
+and the ADNW discussion forum, https://groups.google.com/forum/#!forum/adnw
 
-The ergonomics design is based on the Kissboard concept by Urac
+The ergonomics design is based on the Kissboard concept by Urac, https://docs.google.com/document/d/1TQ_BZYoZRW-ZFIaiolPAr9yNul6SBKypeA4ataw5Tz4/edit
 
 The hardware for wireless Kissboard is designed by fhtagnn, https://github.com/fhtagnn/kissboard
 
