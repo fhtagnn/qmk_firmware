@@ -1,6 +1,6 @@
 # PUQ LAYOUT FOR KISSBOARD
 
-A minimalistic ergonomic keyboard layout for fast and efficient typing in English and German with easy access to characters and accents for western languages. It is operational from the keyboard controller without additional software drivers, programmed in QMK and works for Linux, Android¹, Windows² and IOS. Basic OS layout setting is German (DE) or German with Tilde. 
+A minimalistic ergonomic keyboard layout for fast and efficient typing in English and German with easy access to characters and accents for western languages. It is operational from the keyboard controller without additional software drivers, programmed in QMK and works for Linux, Android¹, Windows² and MacOS. Basic OS layout setting is German (DE) or German with Tilde. 
 
 [![PUQ Layout](https://user-images.githubusercontent.com/16945782/50550486-03bc7c00-0c72-11e9-8fca-22db85fef475.png)](http://www.keyboard-layout-editor.com/#/gists/a7e90b22a3bd994868389277b32144ea)
 • Middle label: standard tap output    • Bottom Label: double tap output    • Corner labels: Layers
@@ -26,9 +26,12 @@ The accents cover most latin western charsets. PUQ is made for German (DE) keyla
 Diacritics key ❖ utilizes a delicate set of layers and macros that call layers to call specific macros. Two new functions were added to QMK (»send_diacritica« und »reset_diac_cycle«) to send different unicode characters by repeated keypresses.
 
 ### Compose Key (double tap del key)
-Double tap delete key, then input keys of the combination. Compose function must be enabled within the OS. With Windows »WinCompose²« must be installed. Compose is not available with Android. Defined trigger key is right Gui/right Windows key. Useful with rarer characters not covered by diacritics key or direct key input (þ,ð,×,ċ,Ł,š,Ş). The display of characters is dependent on their presence in the font.
+Useful with rare characters not covered by diacritics key or direct key input (þ,ð,×,ċ,Ł,š,Ş). 
+Linux: Double tap DELETE key (= RGUI), then input keys of the combination. Compose function must be enabled within the OS. 
+Windows: Double tap ALT-key (=RALT), »WinCompose²« must be installed and configured. 
+Compose is not available with Android. Display of characters depends on their presence in the font.
 
-### NMB (numbers and navigation)
+### NMB Layer (numbers and navigation)
 Tap and hold: plain numerals on right hand, navigation keys on left hand. Double tap toggles lock.
 
 CUTP > hold = Cut, 	tap = Paste     (min. hold ¼ sec)
@@ -45,10 +48,10 @@ SCUTP > Shift+Cut, 	tap = Shift+Paste (shell mode)
 SCOPP > Shift+Copy, 	tap = Shift+Paste (shell mode)
 
 ### NUB Layer (FNB+p)
-Same as NMB layer with numberpad numerals. Useful for some programs like Blender. »FNB+p« activates the layer. In case numlock state is off it can be activated/toggled by pressing »q«. While layer NUB is active, press »p« or »FNB+p« to switch off again.
+Same as NMB layer with numberpad numerals. Useful for some programs like Blender. »FNB+p« activates the layer. In case numlock state is off, it can be activated/toggled by pressing »q«. While layer NUB is active, press »p« or »FNB+p« to switch off again.
 
 ### OS Key (FNB+f)
-Switches unicode input modes for different operating systems. Preset on boot is LINUX (IBUS).
+Switches unicode input modes for different operating systems. Preset on boot is LINUX (IBus).
 
 »FNB+f« toggles: 1. Android¹; 2. Windows with WinCompose²; 3. IOS (untested); 4. back to Linux.
 
@@ -59,13 +62,8 @@ Most common special characters.
 More special characters, dead keys, gimmicks.
 
 ### Known limitations
-Input of unicodes does not work with capslock active.
-The layout is mainly designed for relaxed typing, it might not be perfect for other tasks which require complex key combinations.
-
-
-¹ Unicodes up to 0xFFFF can be sent directly by USB keyboard to rooted Android devices. To enable it, editing the relevant *.kcm files on the device is mandatory. The space + alt entry must be complemented with 0xef00, a reserved unicode. It allows Android to recognize and translate raw unicode input. Tested with Samsung SM-P600 tablet with Android 5.5.1 and Sony smartphones. The controller should connect by OTG adapter. The free app “NulInputMethod” can be utilized to represent the USB keyboard. More info: https://android.stackexchange.com/questions/38405/how-to-insert-unicode-characters-by-their-hex-codes-using-usb-keyboard-on-ics
-
-² Use latest version of WinCompose https://github.com/SamHocevar/wincompose
+Input of unicodes does not work with capslock active. Seems to be a QMK problem.
+The layout is mainly designed for relaxed typing, it might not be perfect for tasks which require complex key combinations or chording.
 
 ### Credits
 Layout concept and QMK implementation by dassuan, mailto:wolf@inter-state.de
@@ -79,4 +77,6 @@ The ergonomics design is based on the Kissboard concept by Urac, https://docs.go
 The hardware for wireless Kissboard is designed by fhtagnn, https://github.com/fhtagnn/kissboard
 
 
+¹ Unicodes up to 0xFFFF can be sent directly by USB keyboard to rooted Android devices. To enable it, editing the relevant *.kcm files on the device is mandatory. The space + alt entry must be complemented with 0xef00, a reserved unicode. It allows Android to recognize and translate raw unicode input. Tested with Samsung SM-P600 tablet with Android 5.5.1 and Sony smartphones. The controller should connect by OTG adapter. The free app “NulInputMethod” can be utilized to represent the USB keyboard. More info: https://android.stackexchange.com/questions/38405/how-to-insert-unicode-characters-by-their-hex-codes-using-usb-keyboard-on-ics
 
+² Use latest version of WinCompose https://github.com/SamHocevar/wincompose
